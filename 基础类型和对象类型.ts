@@ -1,4 +1,4 @@
-// 基础类型 null, undefined, symbol, boolean, void
+// 基础类型 null, undefined, symbol, void, boolean, number, string
 let count: number
 count = 123
 

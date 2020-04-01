@@ -5,7 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node ./src/crawler.ts"
+    "dev": "ts-node ./src/crawler.ts",
+    "serve": "concurrently npm:dev:*",
+    "dev:build": "tsc -w",
+    "dev:start": "nodemon node ./build/crawler.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data/*"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -16,6 +24,8 @@
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.17",
-    "@types/superagent": "^4.1.7"
+    "@types/superagent": "^4.1.7",
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
   }
 }

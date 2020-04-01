@@ -22,8 +22,11 @@ interface Content {
  * @description 分析类
  */
 class DellAnalyzer implements Analyzer {
+  private static instance: DellAnalyzer
   private secret = 'x3b174jsx'
   public url = `http://www.dell-lee.com/typescript/demo.html?secret=${this.secret}`
+
+  private constructor() {}
 
   private getCourseInfo(html: string) {
     const $ = cheerio.load(html)
@@ -56,6 +59,13 @@ class DellAnalyzer implements Analyzer {
     }
     fileContent[courseInfo.time] = courseInfo.data
     return fileContent
+  }
+
+  public static getInstance() {
+    if (!DellAnalyzer.instance) {
+      DellAnalyzer.instance = new DellAnalyzer()
+    }
+    return DellAnalyzer.instance
   }
 
   public analyze(html: string, filePath: string) {

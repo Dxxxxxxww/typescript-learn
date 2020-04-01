@@ -24,21 +24,21 @@ class Crawler {
     this.url = analyzer.url
     this.initSpiderProcess()
   }
-  async getRawHtml() {
+  private async getRawHtml() {
     const result = await superagent.get(this.url)
     return result.text
   }
 
-  async initSpiderProcess() {
+  private async initSpiderProcess() {
     const html = await this.getRawHtml()
     const fileContent = this.analyzer.analyze(html, this.filePath)
     this.writeFile(fileContent)
   }
-  writeFile(content: string) {
+  private writeFile(content: string) {
     fs.writeFileSync(this.filePath, content)
   }
 }
 
-const dellAnalyzer = new DellAnalyzer()
+const dellAnalyzer = DellAnalyzer.getInstance()
 const leeAnalyzer = new LeeAnalyzer()
 new Crawler(dellAnalyzer)

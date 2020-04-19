@@ -53,7 +53,6 @@ console.log(single.name);
 //       Single.instance = new Single()
 //     }
 //     return Single.instance
-//   }
 // })()
 // var b = SingletonA()
 // var c = SingletonA()

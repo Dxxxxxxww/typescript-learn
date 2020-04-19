@@ -16,22 +16,23 @@
 // cup.name = 'make bei'
 // console.log(cup.name)
 
-// 单例模式 只允许有一个实例
+// 单例模式 只允许有一个实例 这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。
 class Single {
-	private static instance: Single
-	private constructor(public name: string) {}
-	static getInstance(name: string) {
-		// 对于 js 而言， 这里可以使用 this 因为 js中的 类是 function 的语法糖，这里的 this 指向函数本身,注1
-		// 而对于其他面向对象语言 static 函数是挂载到类上的，没有 this 所以这里应该使用 Single.instance
-		// if (!this.instance) {
-		// 	this.instance = new Single(name)
-		// }
-		// return this.instance
-		if (!Single.instance) {
-			Single.instance = new Single(name)
-		}
-		return Single.instance
-	}
+  private static instance: Single
+  private constructor(public name: string) {}
+  // 单例模式需要通过一个类方法来获取实例，而不是一个普通方法(普通方法是实例访问，那不就自相矛盾了么)
+  static getInstance(name: string) {
+    // 对于 js 而言， 这里可以使用 this 因为 js中的 类是 function 的语法糖，这里的 this 指向函数本身,注1
+    // 而对于其他面向对象语言 static 函数是挂载到类上的，没有 this 所以这里应该使用 Single.instance
+    // if (!this.instance) {
+    // 	this.instance = new Single(name)
+    // }
+    // return this.instance
+    if (!Single.instance) {
+      Single.instance = new Single(name)
+    }
+    return Single.instance
+  }
 }
 
 // const single = new Single() //报错，因为 constructor 是私有的，类外无法访问。
@@ -47,6 +48,6 @@ console.log(single.name)
 // 上面代码等于下面代码
 function Demo() {}
 
-Demo.getThis = function() {
-	return this
+Demo.getThis = function () {
+  return this
 }
